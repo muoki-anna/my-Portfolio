@@ -13,6 +13,8 @@ import {
   Database,
   Zap,
   Send,
+  FileText,
+  Download,
 } from "lucide-react";
 
 import heroVisual from "@/assets/hero-visual.jpg";
@@ -23,10 +25,10 @@ import project3 from "@/assets/project-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your Name | IT Student & Developer" },
-      { name: "description", content: "Professional tech portfolio of an Information Technology student — projects, skills, and contact." },
-      { property: "og:title", content: "Your Name | IT Student & Developer" },
-      { property: "og:description", content: "Professional tech portfolio of an Information Technology student — projects, skills, and contact." },
+      { title: "Muoki Anna | Software Developer" },
+      { name: "description", content: "Portfolio of Muoki Anna — software developer building elegant, performant web and backend experiences." },
+      { property: "og:title", content: "Muoki Anna | Software Developer" },
+      { property: "og:description", content: "Portfolio of Muoki Anna — software developer building elegant, performant web and backend experiences." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -38,13 +40,14 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
 
 const socialLinks = [
-  { icon: Github, href: "https://github.com/yourhandle", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/yourhandle", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:you@example.com", label: "Email" },
+  { icon: Github, href: "https://github.com/Muoki-Anna", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/in/muoki-anna", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:muokianna@example.com", label: "Email" },
 ];
 
 const skills = [
@@ -72,25 +75,46 @@ const skills = [
 
 const projects = [
   {
-    title: "Shoplytics Dashboard",
-    description: "A full-stack e-commerce analytics dashboard with real-time KPIs, sales charts, and inventory tracking.",
-    tags: ["React", "Node.js", "PostgreSQL"],
+    title: "MediCore API",
+    description: "A secure, RESTful clinical backend built with Java 17 and Spring Boot 3 — JPA persistence, JWT auth, and real-time telemetry for managing patients, staff, and records.",
+    tags: ["Java", "Spring Boot", "JWT", "REST"],
     image: project1,
-    link: "#",
+    link: "https://github.com/Muoki-Anna/medical-api",
   },
   {
-    title: "Bloom Wellness",
-    description: "A mobile-first habit tracker designed for gentle daily wellness routines and progress visualization.",
-    tags: ["React Native", "Firebase", "UI Design"],
+    title: "BloodLife",
+    description: "A web platform connecting blood donors with people in need — location-aware matching and a clean, accessible donor experience.",
+    tags: ["JavaScript", "React", "Vercel"],
     image: project2,
-    link: "#",
+    link: "https://blood-life-five.vercel.app",
   },
   {
-    title: "Nexus Network",
-    description: "A data visualization platform for monitoring network nodes, traffic patterns, and system health.",
-    tags: ["D3.js", "Python", "WebSocket"],
+    title: "Pulse254",
+    description: "A community-driven web app for Kenya — surfacing local pulse, updates, and stories with a modern TypeScript stack.",
+    tags: ["TypeScript", "React", "Web"],
     image: project3,
-    link: "#",
+    link: "https://github.com/Muoki-Anna/Pulse254",
+  },
+  {
+    title: "GrowthSpire Backend",
+    description: "A PHP-powered backend service for a growth and productivity platform — clean routing, data models, and API endpoints.",
+    tags: ["PHP", "API", "Backend"],
+    image: project1,
+    link: "https://github.com/Muoki-Anna/GrowthSpire-Backend",
+  },
+  {
+    title: "Anna's Sparkle Tasks",
+    description: "A delightful task-management app with a personal, playful UI — built to make everyday productivity feel light.",
+    tags: ["TypeScript", "React", "UI"],
+    image: project2,
+    link: "https://github.com/Muoki-Anna/anna-s-sparkle-tasks",
+  },
+  {
+    title: "Next.js Portfolio",
+    description: "An earlier iteration of my developer portfolio built with Next.js — exploring layouts, transitions, and content architecture.",
+    tags: ["Next.js", "React", "Portfolio"],
+    image: project3,
+    link: "https://github.com/Muoki-Anna/nextJS-Portfolio",
   },
 ];
 
@@ -101,7 +125,7 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link to="/" className="font-display text-xl font-semibold tracking-tight text-foreground">
-            Your<span className="text-primary">.</span>Name
+            Muoki<span className="text-primary">.</span>Anna
           </Link>
 
           <ul className="hidden items-center gap-8 md:flex">
@@ -144,7 +168,7 @@ function Index() {
           <div className="order-2 lg:order-1">
             <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-4 py-1.5 text-sm font-medium text-purple-soft">
               <Sparkles className="h-4 w-4" />
-              <span>Information Technology Student</span>
+              <span>Software Developer</span>
             </div>
 
             <h1 className="mt-6 font-display text-5xl font-bold leading-[1.1] tracking-tight md:text-6xl lg:text-7xl">
@@ -153,8 +177,8 @@ function Index() {
             </h1>
 
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
-              Hi, I’m <span className="font-semibold text-foreground">Your Name</span>. I’m a student developer passionate
-              about building clean, accessible, and performant web experiences.
+              Hi, I’m <span className="font-semibold text-foreground">Muoki Anna</span>. I build clean, accessible, and
+              performant web and backend experiences — from RESTful APIs to polished frontends.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -214,28 +238,28 @@ function Index() {
                 About Me
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                I’m currently pursuing a degree in Information Technology, with a strong focus on modern web development and
-                software engineering fundamentals.
+              I’m a software developer focused on modern web development, backend engineering, and clean software design.
+              I enjoy shipping products that are both technically solid and delightful to use.
               </p>
               <p className="mt-4 text-lg text-muted-foreground">
-                I love blending technical problem-solving with thoughtful design — creating digital experiences that feel both
-                powerful and approachable. Whether I’m debugging a backend API or polishing a frontend animation, I bring
-                curiosity and attention to detail.
+              I love blending technical problem-solving with thoughtful design — whether I’m architecting a REST API in
+              Spring Boot, wiring up a React frontend, or refining a UI animation. Curiosity and attention to detail
+              guide every project I take on.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-2xl border border-border/60 bg-card p-6">
                 <div className="font-display text-4xl font-bold text-primary">2+</div>
-                <div className="mt-2 text-sm font-medium text-muted-foreground">Years studying IT</div>
+                <div className="mt-2 text-sm font-medium text-muted-foreground">Years building software</div>
               </div>
               <div className="rounded-2xl border border-border/60 bg-card p-6">
-                <div className="font-display text-4xl font-bold text-primary">10+</div>
+                <div className="font-display text-4xl font-bold text-primary">20+</div>
                 <div className="mt-2 text-sm font-medium text-muted-foreground">Projects built</div>
               </div>
               <div className="rounded-2xl border border-border/60 bg-card p-6">
-                <div className="font-display text-4xl font-bold text-primary">3</div>
-                <div className="mt-2 text-sm font-medium text-muted-foreground">Internships</div>
+                <div className="font-display text-4xl font-bold text-primary">5+</div>
+                <div className="mt-2 text-sm font-medium text-muted-foreground">Stacks explored</div>
               </div>
               <div className="rounded-2xl border border-border/60 bg-card p-6">
                 <div className="font-display text-4xl font-bold text-primary">∞</div>
@@ -293,7 +317,7 @@ function Index() {
               </p>
             </div>
             <a
-              href="https://github.com/yourhandle"
+              href="https://github.com/Muoki-Anna"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
@@ -352,6 +376,50 @@ function Index() {
         </div>
       </section>
 
+      {/* Resume */}
+      <section id="resume" className="px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-4xl">
+          <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card p-8 md:p-12">
+            <div className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+            <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-purple-soft/20 blur-3xl" />
+
+            <div className="relative grid gap-8 md:grid-cols-[auto,1fr] md:items-center">
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <FileText className="h-10 w-10" />
+              </div>
+              <div>
+                <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Resume</h2>
+                <p className="mt-3 text-lg text-muted-foreground">
+                  Grab the latest version of my resume for a full overview of my experience, education, and skills.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a
+                    href="/resume.pdf"
+                    download
+                    className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download Resume
+                  </a>
+                  <a
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    View in browser
+                  </a>
+                </div>
+                <p className="mt-4 text-xs text-muted-foreground">
+                  To update it, replace <code className="rounded bg-secondary px-1.5 py-0.5 text-purple-soft">public/resume.pdf</code> with your latest file.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact */}
       <section id="contact" className="px-6 py-24 md:py-32">
         <div className="mx-auto max-w-4xl">
@@ -367,14 +435,14 @@ function Index() {
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <a
-                  href="mailto:you@example.com"
+                  href="mailto:muokianna@example.com"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105 sm:w-auto"
                 >
                   <Send className="h-4 w-4" />
                   Send an email
                 </a>
                 <a
-                  href="https://linkedin.com/in/yourhandle"
+                  href="https://linkedin.com/in/muoki-anna"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-8 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:w-auto"
@@ -407,7 +475,7 @@ function Index() {
       <footer className="border-t border-border/40 px-6 py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Your Name. Built with care.
+            © {new Date().getFullYear()} Muoki Anna. Built with care.
           </p>
           <p className="text-sm text-muted-foreground">
             Designed in the dark, powered by{" "}

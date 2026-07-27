@@ -1,24 +1,420 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Sparkles,
+  Code2,
+  Terminal,
+  Palette,
+  Cpu,
+  Globe,
+  Database,
+  Zap,
+  Send,
+} from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import heroVisual from "@/assets/hero-visual.jpg";
+import project1 from "@/assets/project-1.jpg";
+import project2 from "@/assets/project-2.jpg";
+import project3 from "@/assets/project-3.jpg";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Your Name | IT Student & Developer" },
+      { name: "description", content: "Professional tech portfolio of an Information Technology student — projects, skills, and contact." },
+      { property: "og:title", content: "Your Name | IT Student & Developer" },
+      { property: "og:description", content: "Professional tech portfolio of an Information Technology student — projects, skills, and contact." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
+
+const socialLinks = [
+  { icon: Github, href: "https://github.com/yourhandle", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/in/yourhandle", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:you@example.com", label: "Email" },
+];
+
+const skills = [
+  {
+    title: "Frontend",
+    icon: Palette,
+    items: ["React", "TypeScript", "Tailwind CSS", "Next.js"],
+  },
+  {
+    title: "Backend",
+    icon: Database,
+    items: ["Node.js", "Python", "PostgreSQL", "REST APIs"],
+  },
+  {
+    title: "Tools & DevOps",
+    icon: Terminal,
+    items: ["Git", "Docker", "Linux", "Figma"],
+  },
+  {
+    title: "Core CS",
+    icon: Cpu,
+    items: ["Data Structures", "Algorithms", "OOP", "System Design"],
+  },
+];
+
+const projects = [
+  {
+    title: "Shoplytics Dashboard",
+    description: "A full-stack e-commerce analytics dashboard with real-time KPIs, sales charts, and inventory tracking.",
+    tags: ["React", "Node.js", "PostgreSQL"],
+    image: project1,
+    link: "#",
+  },
+  {
+    title: "Bloom Wellness",
+    description: "A mobile-first habit tracker designed for gentle daily wellness routines and progress visualization.",
+    tags: ["React Native", "Firebase", "UI Design"],
+    image: project2,
+    link: "#",
+  },
+  {
+    title: "Nexus Network",
+    description: "A data visualization platform for monitoring network nodes, traffic patterns, and system health.",
+    tags: ["D3.js", "Python", "WebSocket"],
+    image: project3,
+    link: "#",
+  },
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navigation */}
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <Link to="/" className="font-display text-xl font-semibold tracking-tight text-foreground">
+            Your<span className="text-primary">.</span>Name
+          </Link>
+
+          <ul className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-3">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                <social.icon className="h-5 w-5" />
+              </a>
+            ))}
+          </div>
+        </nav>
+      </header>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden px-6 pt-32 pb-24 md:pt-40 md:pb-32">
+        <div className="absolute inset-0 bg-gradient-radial opacity-40" />
+        <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-purple-soft/10 blur-3xl" />
+
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+          <div className="order-2 lg:order-1">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-4 py-1.5 text-sm font-medium text-purple-soft">
+              <Sparkles className="h-4 w-4" />
+              <span>Information Technology Student</span>
+            </div>
+
+            <h1 className="mt-6 font-display text-5xl font-bold leading-[1.1] tracking-tight md:text-6xl lg:text-7xl">
+              Building elegant solutions with a{" "}
+              <span className="text-gradient">creative touch</span>.
+            </h1>
+
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">
+              Hi, I’m <span className="font-semibold text-foreground">Your Name</span>. I’m a student developer passionate
+              about building clean, accessible, and performant web experiences.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105"
+              >
+                <Code2 className="h-4 w-4" />
+                View Projects
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+              >
+                <Mail className="h-4 w-4" />
+                Get in Touch
+              </a>
+            </div>
+
+            <div className="mt-10 flex items-center gap-6 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Zap className="h-4 w-4 text-primary" />
+                <span>Fast learner</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Globe className="h-4 w-4 text-primary" />
+                <span>Remote-ready</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Terminal className="h-4 w-4 text-primary" />
+                <span>Open source fan</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <div className="relative mx-auto aspect-square max-w-md lg:max-w-none">
+              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/30 to-purple-soft/20 blur-2xl" />
+              <img
+                src={heroVisual}
+                alt="Abstract 3D glass purple shapes floating on dark background"
+                width={1024}
+                height={1024}
+                className="relative h-full w-full rounded-[2rem] object-cover glow-purple"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
+                About Me
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                I’m currently pursuing a degree in Information Technology, with a strong focus on modern web development and
+                software engineering fundamentals.
+              </p>
+              <p className="mt-4 text-lg text-muted-foreground">
+                I love blending technical problem-solving with thoughtful design — creating digital experiences that feel both
+                powerful and approachable. Whether I’m debugging a backend API or polishing a frontend animation, I bring
+                curiosity and attention to detail.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <div className="font-display text-4xl font-bold text-primary">2+</div>
+                <div className="mt-2 text-sm font-medium text-muted-foreground">Years studying IT</div>
+              </div>
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <div className="font-display text-4xl font-bold text-primary">10+</div>
+                <div className="mt-2 text-sm font-medium text-muted-foreground">Projects built</div>
+              </div>
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <div className="font-display text-4xl font-bold text-primary">3</div>
+                <div className="mt-2 text-sm font-medium text-muted-foreground">Internships</div>
+              </div>
+              <div className="rounded-2xl border border-border/60 bg-card p-6">
+                <div className="font-display text-4xl font-bold text-primary">∞</div>
+                <div className="mt-2 text-sm font-medium text-muted-foreground">Cups of coffee</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section id="skills" className="px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center">
+            <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Skills & Tools</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              My toolkit is growing every semester. Here are the technologies I’m most comfortable with right now.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {skills.map((skill) => (
+              <div
+                key={skill.title}
+                className="group rounded-2xl border border-border/60 bg-card p-6 transition-all hover:border-glow hover:bg-card/80"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <skill.icon className="h-6 w-6" />
+                </div>
+                <h3 className="mt-5 font-display text-lg font-semibold">{skill.title}</h3>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {skill.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Featured Projects</h2>
+              <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+                A selection of projects that showcase my development, design, and problem-solving skills.
+              </p>
+            </div>
+            <a
+              href="https://github.com/yourhandle"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+            >
+              <Github className="h-4 w-4" />
+              More on GitHub
+            </a>
+          </div>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project, index) => (
+              <article
+                key={project.title}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all hover:border-glow hover:shadow-xl hover:shadow-primary/10"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} project thumbnail`}
+                    width={1024}
+                    height={768}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent opacity-60" />
+                </div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-start justify-between">
+                    <h3 className="font-display text-xl font-semibold">{project.title}</h3>
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Open ${project.title} project`}
+                      className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </div>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border/60 px-3 py-1 text-xs font-medium text-purple-soft"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-4xl">
+          <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card p-8 md:p-12">
+            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-purple-soft/20 blur-3xl" />
+
+            <div className="relative text-center">
+              <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Let’s build something together</h2>
+              <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
+                I’m open to internships, collaborations, and exciting opportunities. Drop me a message and let’s chat.
+              </p>
+
+              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <a
+                  href="mailto:you@example.com"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105 sm:w-auto"
+                >
+                  <Send className="h-4 w-4" />
+                  Send an email
+                </a>
+                <a
+                  href="https://linkedin.com/in/yourhandle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-8 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:w-auto"
+                >
+                  <Linkedin className="h-4 w-4" />
+                  Connect on LinkedIn
+                </a>
+              </div>
+
+              <div className="mt-10 flex justify-center gap-4">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-border/60 bg-secondary/60 text-muted-foreground transition-all hover:border-primary/40 hover:text-primary"
+                  >
+                    <social.icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border/40 px-6 py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Your Name. Built with care.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Designed in the dark, powered by{" "}
+            <span className="text-purple-soft">purple</span>.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

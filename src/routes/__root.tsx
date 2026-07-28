@@ -78,10 +78,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Muoki Anna | Software Developer" },
-      { name: "description", content: "Portfolio of Muoki Anna — software developer building elegant, performant web and backend experiences." },
+      {
+        name: "description",
+        content:
+          "Portfolio of Muoki Anna — software developer building elegant, performant web and backend experiences.",
+      },
       { name: "author", content: "Muoki Anna" },
       { property: "og:title", content: "Muoki Anna | Software Developer" },
-      { property: "og:description", content: "Portfolio of Muoki Anna — software developer building elegant, performant web and backend experiences." },
+      {
+        property: "og:description",
+        content:
+          "Portfolio of Muoki Anna — software developer building elegant, performant web and backend experiences.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@muokianna" },
@@ -111,6 +119,22 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en" className="dark">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme');
+                  if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body>
         {children}

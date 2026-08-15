@@ -22,6 +22,9 @@ import heroVisual from "@/assets/tech-hero-visual.png";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
+import projectMedicore from "@/assets/project-medicore.png";
+import projectPulse254 from "@/assets/project-pulse254.png";
+import projectGrowthspire from "@/assets/project-growthspire.png";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createFileRoute("/")({
@@ -89,23 +92,17 @@ const projects = [
     description:
       "A secure, RESTful clinical backend built with Java 17 and Spring Boot 3 — JPA persistence, JWT auth, and real-time telemetry for managing patients, staff, and records.",
     tags: ["Java", "Spring Boot", "JWT", "REST"],
-    image: project1,
+    image: projectMedicore,
     link: "https://github.com/Muoki-Anna/medical-api",
   },
-  {
-    title: "BloodLife",
-    description:
-      "A web platform connecting blood donors with people in need — location-aware matching and a clean, accessible donor experience.",
-    tags: ["JavaScript", "React", "Vercel"],
-    image: project2,
-    link: "https://blood-life-five.vercel.app",
-  },
+  
+    
   {
     title: "Pulse254",
     description:
       "A community-driven web app for Kenya — surfacing local pulse, updates, and stories with a modern TypeScript stack.",
     tags: ["TypeScript", "React", "Web"],
-    image: project3,
+    image: projectPulse254,
     link: "https://github.com/Muoki-Anna/Pulse254",
   },
   {
@@ -113,25 +110,10 @@ const projects = [
     description:
       "A PHP-powered backend service for a growth and productivity platform — clean routing, data models, and API endpoints.",
     tags: ["PHP", "API", "Backend"],
-    image: project1,
+    image: projectGrowthspire,
     link: "https://github.com/Muoki-Anna/GrowthSpire-Backend",
   },
-  {
-    title: "Anna's Sparkle Tasks",
-    description:
-      "A delightful task-management app with a personal, playful UI — built to make everyday productivity feel light.",
-    tags: ["TypeScript", "React", "UI"],
-    image: project2,
-    link: "https://github.com/Muoki-Anna/anna-s-sparkle-tasks",
-  },
-  {
-    title: "Next.js Portfolio",
-    description:
-      "An earlier iteration of my developer portfolio built with Next.js — exploring layouts, transitions, and content architecture.",
-    tags: ["Next.js", "React", "Portfolio"],
-    image: project3,
-    link: "https://github.com/Muoki-Anna/nextJS-Portfolio",
-  },
+  
 ];
 
 function Index() {
@@ -204,7 +186,7 @@ function Index() {
               <img
                 src="/favicon.ico"
                 alt="Muoki Anna Logo"
-                className="h-8 w-8 rounded-lg border border-border/40 bg-secondary/40 p-1 shadow-sm transition-all duration-300 hover:scale-110 hover:border-primary/40 hover:shadow-md"
+                className="h-28 w-28 rounded-2xl border-2 border-primary/20 bg-secondary/50 p-2 shadow-lg shadow-primary/5 transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:shadow-primary/20 hover:shadow-lg"
               />
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-4 py-1.5 text-sm font-medium text-purple-soft">
@@ -386,16 +368,16 @@ function Index() {
                 key={project.title}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all hover:border-glow hover:shadow-xl hover:shadow-primary/10"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-video overflow-hidden bg-secondary/30 border-b border-border/40">
                   <img
                     src={project.image}
                     alt={`${project.title} project thumbnail`}
-                    width={1024}
-                    height={768}
+                    width={1680}
+                    height={720}
                     loading={index === 0 ? "eager" : "lazy"}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card/10 via-transparent to-transparent opacity-60 pointer-events-none" />
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
@@ -469,13 +451,7 @@ function Index() {
                     View in browser
                   </a>
                 </div>
-                <p className="mt-4 text-xs text-muted-foreground">
-                  To update it, replace{" "}
-                  <code className="rounded bg-secondary px-1.5 py-0.5 text-purple-soft">
-                    public/resume.pdf
-                  </code>{" "}
-                  with your latest file.
-                </p>
+                
               </div>
             </div>
           </div>
@@ -500,7 +476,7 @@ function Index() {
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <a
-                  href="mailto:muokianna@example.com"
+                  href="mailto:muokianna10@gmail.com"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105 sm:w-auto"
                 >
                   <Send className="h-4 w-4" />

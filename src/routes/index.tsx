@@ -18,7 +18,7 @@ import {
   Download,
 } from "lucide-react";
 
-import heroVisual from "@/assets/tech-hero-visual.png";
+import heroVisual from "@/assets/hero image.png";
 import projectMedicore from "@/assets/project-medicore.png";
 import projectPulse254 from "@/assets/project-pulse254.png";
 import projectGrowthspire from "@/assets/project-growthspire.png";
@@ -61,6 +61,7 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Blog", href: "/blog" },
   { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
@@ -183,7 +184,7 @@ function Index() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {link.label}
                 </a>
@@ -618,14 +619,7 @@ function Index() {
       <footer className="border-t border-border/40 px-6 py-7">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Muoki Anna. Built with care.
-          </p>
-
-          <p className="text-sm text-muted-foreground">
-            {!isMounted || isDark
-              ? "Designed in the dark"
-              : "Enjoyed in the light"}
-            , powered by <span className="text-purple-soft">ANNA</span>.
+            © {new Date().getFullYear()} Muoki Anna. Built with ❤️.
           </p>
         </div>
       </footer>

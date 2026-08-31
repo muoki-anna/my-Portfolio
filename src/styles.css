@@ -11,8 +11,8 @@
  */
 
 @theme inline {
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "DM Sans", sans-serif;
+  --font-display: "Inter", "Open Sans", sans-serif;
+  --font-body: "Roboto", "Open Sans", sans-serif;
 
   --radius: 0.75rem;
   --radius-sm: calc(var(--radius) - 4px);

@@ -8,9 +8,11 @@ import {
   Mail,
   BookOpen,
   ChevronUp,
+  Menu,
+  X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { getBlogPost, getAllBlogPosts } from "@/lib/blog-data";
+import { getBlogPost, getAllBlogPosts, type BlogPost as BlogPostType } from "@/lib/blog-data";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -360,9 +362,10 @@ function renderInline(text: string): React.ReactNode {
 /* ------------------------------------------------------------------ */
 
 function BlogPost() {
-  const { post } = Route.useLoaderData();
+  const { post } = Route.useLoaderData() as { post: BlogPostType };
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [readProgress, setReadProgress] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -413,6 +416,14 @@ function BlogPost() {
             </li>
             <li>
               <Link
+                to="/projects"
+                className="text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/blog"
                 className="text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
               >
@@ -423,24 +434,89 @@ function BlogPost() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <div className="mx-1 h-4 w-px bg-border/40" />
-            {socialLinks.map((social) => {
-              const Icon = social.icon;
-              return (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              );
-            })}
+            <div className="mx-1 hidden h-4 w-px bg-border/40 sm:block" />
+            <div className="hidden sm:flex items-center gap-1">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              className="rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground md:hidden"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </nav>
+
+        {/* Mobile menu dropdown */}
+        {mobileMenuOpen && (
+          <div className="border-b border-border/40 bg-background/95 px-6 py-4 backdrop-blur-lg md:hidden">
+            <ul className="flex flex-col gap-3">
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-1 text-sm font-semibold text-muted-foreground hover:text-foreground"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/projects"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-1 text-sm font-semibold text-muted-foreground hover:text-foreground"
+                >
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blog"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-1 text-sm font-semibold text-primary"
+                >
+                  Blog
+                </Link>
+              </li>
+            </ul>
+
+            <div className="mt-4 flex items-center gap-3 border-t border-border/40 pt-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Article Header */}
@@ -591,13 +667,17 @@ function BlogPost() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Muoki Anna. Built with care.
           </p>
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to all posts
-          </Link>
+          <div className="flex items-center gap-5 text-sm text-muted-foreground">
+            <Link to="/" className="transition-colors hover:text-foreground">
+              Home
+            </Link>
+            <Link to="/projects" className="transition-colors hover:text-foreground">
+              Projects
+            </Link>
+            <Link to="/blog" className="transition-colors hover:text-foreground">
+              All Posts
+            </Link>
+          </div>
         </div>
       </footer>
 

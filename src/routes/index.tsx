@@ -16,13 +16,13 @@ import {
   Send,
   FileText,
   Download,
+  Menu,
+  X,
 } from "lucide-react";
 
-import heroVisual from "@/assets/hero image.png";
-import projectMedicore from "@/assets/project-medicore.png";
-import projectPulse254 from "@/assets/project-pulse254.png";
-import projectGrowthspire from "@/assets/project-growthspire.png";
+import heroVisual from "@/assets/hero-binary-green.jpg";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { TechIcon } from "@/components/TechIcon";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/")({
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
@@ -115,36 +115,10 @@ const skills = [
   },
 ];
 
-const projects = [
-  {
-    title: "MediCore API",
-    description:
-      "A secure, RESTful clinical backend built with Java 17 and Spring Boot 3 — JPA persistence, JWT authentication, and telemetry for managing patients, staff, and records.",
-    tags: ["Java", "Spring Boot", "JWT", "REST"],
-    image: projectMedicore,
-    link: "https://github.com/Muoki-Anna/medical-api",
-  },
-  {
-    title: "Pulse254",
-    description:
-      "A community-driven web app for Kenya — surfacing local pulse, updates, and stories with a modern TypeScript stack.",
-    tags: ["TypeScript", "React", "Web"],
-    image: projectPulse254,
-    link: "https://github.com/Muoki-Anna/Pulse254",
-  },
-  {
-    title: "GrowthSpire Backend",
-    description:
-      "A PHP-powered backend service for a growth and productivity platform — clean routing, data models, and API endpoints.",
-    tags: ["PHP", "API", "Backend"],
-    image: projectGrowthspire,
-    link: "https://github.com/Muoki-Anna/GrowthSpire-Backend",
-  },
-];
-
 function Index() {
   const [isMounted, setIsMounted] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -182,12 +156,21 @@ function Index() {
           <ul className="hidden items-center gap-7 md:flex">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {link.label}
-                </a>
+                {link.href.startsWith("/") ? (
+                  <Link
+                    to={link.href}
+                    className="text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={link.href}
+                    className="text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -195,26 +178,85 @@ function Index() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
 
-            <div className="mx-1 h-4 w-px bg-border/40" />
+            <div className="mx-1 hidden h-4 w-px bg-border/40 sm:block" />
 
-            {socialLinks.map((social) => {
-              const Icon = social.icon;
+            <div className="hidden sm:flex items-center gap-1">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
 
-              return (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              );
-            })}
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              className="rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground md:hidden"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </nav>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="border-b border-border/40 bg-background/95 px-6 py-4 backdrop-blur-lg md:hidden">
+            <ul className="flex flex-col gap-3">
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      to={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-1 text-sm font-semibold text-muted-foreground hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-1 text-sm font-semibold text-muted-foreground hover:text-foreground"
+                    >
+                      {link.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-4 flex items-center gap-3 border-t border-border/40 pt-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero */}
@@ -256,13 +298,13 @@ function Index() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#projects"
+              <Link
+                to="/projects"
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105"
               >
                 <Code2 className="h-4 w-4" />
                 View Projects
-              </a>
+              </Link>
 
               <a
                 href="#contact"
@@ -298,10 +340,10 @@ function Index() {
 
               <img
                 src={heroVisual}
-                alt="Abstract digital tech background with glowing purple and blue code lines and circuit patterns"
+                alt="Abstract digital tech background with glowing matrix green binary codes and circuit patterns"
                 width={1024}
                 height={1024}
-                className="relative h-full w-full rounded-[2rem] object-cover glow-purple"
+                className="relative h-full w-full rounded-[2rem] object-cover glow-green"
               />
             </div>
           </div>
@@ -395,24 +437,30 @@ function Index() {
               return (
                 <div
                   key={skill.title}
-                  className="group rounded-2xl border border-border/60 bg-card p-5 transition-all hover:border-glow hover:bg-card/80"
+                  className="group rounded-2xl border border-border/60 bg-card p-5 transition-all hover:border-glow hover:bg-card/80 hover:shadow-lg hover:shadow-primary/5"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="h-5 w-5" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="rounded-full border border-border/50 bg-secondary/40 px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+                      {skill.items.length} skills
+                    </span>
                   </div>
 
                   <h3 className="mt-4 font-display text-lg font-semibold">
                     {skill.title}
                   </h3>
 
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {skill.items.map((item) => (
-                      <span
+                      <div
                         key={item}
-                        className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                        className="inline-flex items-center gap-2 rounded-xl border border-border/60 bg-secondary/50 px-3 py-1.5 text-xs font-medium text-foreground shadow-2xs transition-all duration-200 hover:border-primary/50 hover:bg-secondary hover:shadow-sm hover:scale-105"
                       >
-                        {item}
-                      </span>
+                        <TechIcon name={item} className="h-4 w-4 shrink-0" />
+                        <span>{item}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -422,88 +470,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="px-6 py-16 md:py-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
-                Featured Projects
-              </h2>
-
-              <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
-                A selection of projects that showcase my development, design,
-                and problem-solving skills.
-              </p>
-            </div>
-
-            <a
-              href="https://github.com/Muoki-Anna"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
-            >
-              <Github className="h-4 w-4" />
-              More on GitHub
-            </a>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <article
-                key={project.title}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all hover:border-glow hover:shadow-xl hover:shadow-primary/10"
-              >
-                <div className="relative aspect-video overflow-hidden border-b border-border/40 bg-secondary/30">
-                  <img
-                    src={project.image}
-                    alt={`${project.title} project thumbnail`}
-                    width={1680}
-                    height={720}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
-
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/10 via-transparent to-transparent opacity-60" />
-                </div>
-
-                <div className="flex flex-1 flex-col p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-display text-xl font-semibold">
-                      {project.title}
-                    </h3>
-
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Open ${project.title} project`}
-                      className="shrink-0 rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
-
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {project.description}
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-border/60 px-3 py-1 text-xs font-medium text-purple-soft"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Resume */}
       <section id="resume" className="px-6 py-16 md:py-20">
@@ -621,6 +587,20 @@ function Index() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Muoki Anna. Built with ❤️.
           </p>
+          <div className="flex items-center gap-5 text-sm text-muted-foreground">
+            <Link to="/projects" className="transition-colors hover:text-foreground">
+              Projects
+            </Link>
+            <Link to="/blog" className="transition-colors hover:text-foreground">
+              Blog
+            </Link>
+            <a href="#about" className="transition-colors hover:text-foreground">
+              About
+            </a>
+            <a href="#contact" className="transition-colors hover:text-foreground">
+              Contact
+            </a>
+          </div>
         </div>
       </footer>
     </div>

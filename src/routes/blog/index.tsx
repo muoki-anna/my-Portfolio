@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -9,6 +10,8 @@ import {
   Linkedin,
   Mail,
   ArrowRight,
+  Menu,
+  X,
 } from "lucide-react";
 import { getAllBlogPosts } from "@/lib/blog-data";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -54,6 +57,7 @@ const socialLinks = [
 
 function BlogIndex() {
   const posts = getAllBlogPosts();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -78,6 +82,14 @@ function BlogIndex() {
             </li>
             <li>
               <Link
+                to="/projects"
+                className="text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/blog"
                 className="text-sm font-medium text-foreground transition-colors"
               >
@@ -89,25 +101,90 @@ function BlogIndex() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
 
-            <div className="mx-1 h-4 w-px bg-border/40" />
+            <div className="mx-1 hidden h-4 w-px bg-border/40 sm:block" />
 
-            {socialLinks.map((social) => {
-              const Icon = social.icon;
-              return (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              );
-            })}
+            <div className="hidden sm:flex items-center gap-1">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                );
+              })}
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              className="rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground md:hidden"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </nav>
+
+        {/* Mobile menu dropdown */}
+        {mobileMenuOpen && (
+          <div className="border-b border-border/40 bg-background/95 px-6 py-4 backdrop-blur-lg md:hidden">
+            <ul className="flex flex-col gap-3">
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-1 text-sm font-semibold text-muted-foreground hover:text-foreground"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/projects"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-1 text-sm font-semibold text-muted-foreground hover:text-foreground"
+                >
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blog"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-1 text-sm font-semibold text-primary"
+                >
+                  Blog
+                </Link>
+              </li>
+            </ul>
+
+            <div className="mt-4 flex items-center gap-3 border-t border-border/40 pt-3">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero */}
@@ -266,13 +343,17 @@ function BlogIndex() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Muoki Anna.
           </p>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to portfolio
-          </Link>
+          <div className="flex items-center gap-5 text-sm text-muted-foreground">
+            <Link to="/" className="transition-colors hover:text-foreground">
+              Home
+            </Link>
+            <Link to="/projects" className="transition-colors hover:text-foreground">
+              Projects
+            </Link>
+            <Link to="/blog" className="font-semibold text-foreground">
+              Blog
+            </Link>
+          </div>
         </div>
       </footer>
     </div>

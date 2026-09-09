@@ -296,80 +296,36 @@ function Index() {
         <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-purple-soft/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-8 md:gap-12">
-            {/* Hero content - Extended across the page */}
-            <div className="flex-1 min-w-0">
-              <div className="mb-4 flex items-center gap-3.5">
+          <div className="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto] gap-x-4 sm:gap-x-8 md:gap-x-12 items-start">
+            {/* Top header - Logo, Badge, and Heading (Row 1, Col 1) */}
+            <div className="col-start-1 row-start-1 min-w-0">
+              <div className="mb-3 sm:mb-4 flex flex-wrap items-center gap-2.5 sm:gap-3.5">
                 <img
                   src="/favicon.ico"
                   alt="Muoki Anna Logo"
-                  className="h-14 w-14 rounded-2xl border-2 border-primary/30 bg-card p-1.5 shadow-md shadow-primary/10 transition-all duration-300 hover:scale-105 hover:border-primary/50"
+                  className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl border-2 border-primary/30 bg-card p-1.5 shadow-md shadow-primary/10 transition-all duration-300 hover:scale-105 hover:border-primary/50"
                 />
-                <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-4 py-1.5 text-sm font-medium text-purple-soft">
-                  <Sparkles className="h-4 w-4" />
+                <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-border/60 bg-secondary/60 px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium text-purple-soft">
+                  <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   <span>Software Developer</span>
                 </div>
               </div>
 
-              <h1 className="font-display text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.15] tracking-tight">
                 Building elegant solutions with a{" "}
                 <span className="text-gradient">creative touch</span>.
               </h1>
-
-              <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-                Hi, I’m{" "}
-                <span className="font-semibold text-foreground">
-                  Muoki Anna
-                </span>
-                . I build clean, accessible, and performant web and backend
-                experiences — from RESTful APIs to polished frontends.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link
-                  to="/projects"
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105"
-                >
-                  <Code2 className="h-4 w-4" />
-                  View Projects
-                </Link>
-
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
-                >
-                  <Mail className="h-4 w-4" />
-                  Get in Touch
-                </a>
-              </div>
-
-              <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-primary" />
-                  <span>Fast learner</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 text-primary" />
-                  <span>Remote-ready</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Terminal className="h-4 w-4 text-primary" />
-                  <span>Open source fan</span>
-                </div>
-              </div>
             </div>
 
-            {/* Hero visual - Pushed to the right */}
-            <div className="flex shrink-0 self-end md:self-start justify-end">
-              <div className="group relative w-full max-w-[195px] sm:max-w-[215px] lg:max-w-[235px]">
+            {/* Hero visual - Sits on the right (Row 1 on mobile, Rows 1-2 on desktop) */}
+            <div className="col-start-2 row-start-1 md:row-span-2 shrink-0 flex justify-end">
+              <div className="group relative w-[105px] sm:w-[155px] md:w-[200px] lg:w-[225px]">
                 {/* Soft decorative ambient glow */}
-                <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-primary/30 via-primary/10 to-transparent blur-xl opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute -inset-1 sm:-inset-1.5 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-primary/30 via-primary/10 to-transparent blur-md sm:blur-xl opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
 
                 {/* Polished card container */}
-                <div className="relative overflow-hidden rounded-[1.5rem] border border-border/90 bg-card/85 p-3 shadow-xl shadow-primary/5 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-primary/15">
-                  <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-secondary/40">
+                <div className="relative overflow-hidden rounded-xl sm:rounded-[1.5rem] border border-border/90 bg-card/85 p-1.5 sm:p-2.5 md:p-3 shadow-lg sm:shadow-xl shadow-primary/5 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-primary/15">
+                  <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg sm:rounded-xl bg-secondary/40">
                     <img
                       src={heroVisual}
                       alt="Muoki Anna - Software Developer"
@@ -382,14 +338,61 @@ function Index() {
                 </div>
 
                 {/* Professional availability badge */}
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-border/80 bg-background/95 px-3 py-1 text-xs font-medium text-foreground shadow-md backdrop-blur-md">
-                  <span className="inline-flex items-center gap-1.5">
-                    <span className="relative flex h-2 w-2">
+                <div className="absolute -bottom-2.5 sm:-bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-border/80 bg-background/95 px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-medium text-foreground shadow-md backdrop-blur-md">
+                  <span className="inline-flex items-center gap-1 sm:gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                      <span className="relative inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-500" />
                     </span>
                     Available for hire
                   </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Content - Paragraph, CTA buttons, feature pills (spans full width on mobile, Col 1 on desktop) */}
+            <div className="col-span-2 md:col-span-1 col-start-1 row-start-2 min-w-0 mt-4 sm:mt-5">
+              <p className="max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
+                Hi, I’m{" "}
+                <span className="font-semibold text-foreground">
+                  Muoki Anna
+                </span>
+                . I build clean, accessible, and performant web and backend
+                experiences — from RESTful APIs to polished frontends.
+              </p>
+
+              <div className="mt-5 sm:mt-6 flex flex-wrap gap-2.5 sm:gap-3">
+                <Link
+                  to="/projects"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105"
+                >
+                  <Code2 className="h-4 w-4" />
+                  View Projects
+                </Link>
+
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                >
+                  <Mail className="h-4 w-4" />
+                  Get in Touch
+                </a>
+              </div>
+
+              <div className="mt-6 sm:mt-7 flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2.5 sm:gap-y-3 text-xs sm:text-sm text-muted-foreground">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+                  <span>Fast learner</span>
+                </div>
+
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Globe className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+                  <span>Remote-ready</span>
+                </div>
+
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Terminal className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+                  <span>Open source fan</span>
                 </div>
               </div>
             </div>

@@ -193,9 +193,9 @@ function BlogIndex() {
 
       {/* Hero */}
       <section className="relative overflow-hidden px-6 pb-10 pt-24 md:pb-14 md:pt-28">
-        <div className="absolute inset-0 bg-gradient-radial opacity-40" />
-        <div className="absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-[300px] w-[300px] rounded-full bg-purple-soft/10 blur-3xl" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-radial opacity-40" />
+        <div className="hidden dark:block absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="hidden dark:block absolute bottom-0 left-0 h-[300px] w-[300px] rounded-full bg-purple-soft/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-4xl text-center">
           <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/60 px-4 py-1.5 text-sm font-medium text-purple-soft">

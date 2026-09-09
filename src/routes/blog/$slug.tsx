@@ -537,8 +537,8 @@ function BlogPost() {
 
       {/* Article Header */}
       <section className="relative overflow-hidden px-6 pb-8 pt-24 md:pb-10 md:pt-28">
-        <div className="absolute inset-0 bg-gradient-radial opacity-30" />
-        <div className="absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-radial opacity-30" />
+        <div className="hidden dark:block absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-3xl">
           {/* Back link */}

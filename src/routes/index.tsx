@@ -289,11 +289,11 @@ function Index() {
 
       {/* Hero */}
       <section className="relative overflow-hidden px-6 pb-16 pt-24 md:pb-20 md:pt-28">
-        <div className="absolute inset-0 bg-gradient-radial opacity-40" />
+        <div className="hidden dark:block absolute inset-0 bg-gradient-radial opacity-40" />
 
-        <div className="absolute right-0 top-0 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="hidden dark:block absolute right-0 top-0 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
 
-        <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-purple-soft/10 blur-3xl" />
+        <div className="hidden dark:block absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-purple-soft/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-6xl">
           <div className="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto] gap-x-4 sm:gap-x-8 md:gap-x-12 items-start">
@@ -321,7 +321,7 @@ function Index() {
             <div className="col-start-2 row-start-1 md:row-span-2 shrink-0 flex justify-end">
               <div className="group relative w-[105px] sm:w-[155px] md:w-[200px] lg:w-[225px]">
                 {/* Soft decorative ambient glow */}
-                <div className="absolute -inset-1 sm:-inset-1.5 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-primary/30 via-primary/10 to-transparent blur-md sm:blur-xl opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="hidden dark:block absolute -inset-1 sm:-inset-1.5 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-primary/30 via-primary/10 to-transparent blur-md sm:blur-xl opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
 
                 {/* Polished card container */}
                 <div className="relative overflow-hidden rounded-xl sm:rounded-[1.5rem] border border-border/90 bg-card/85 p-1.5 sm:p-2.5 md:p-3 shadow-lg sm:shadow-xl shadow-primary/5 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/40 group-hover:shadow-primary/15">
@@ -525,9 +525,9 @@ function Index() {
       <section id="resume" className="px-6 py-16 md:py-20">
         <div className="mx-auto max-w-4xl">
           <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card p-6 md:p-8">
-            <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+            <div className="hidden dark:block absolute -left-24 -top-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
 
-            <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-purple-soft/20 blur-3xl" />
+            <div className="hidden dark:block absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-purple-soft/20 blur-3xl" />
 
             <div className="relative grid gap-6 md:grid-cols-[auto,1fr] md:items-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">

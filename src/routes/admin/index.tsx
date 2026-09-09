@@ -279,8 +279,8 @@ function AdminPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
         <div className="relative w-full max-w-md">
-          <div className="absolute -left-12 -top-12 h-48 w-48 rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute -bottom-12 -right-12 h-48 w-48 rounded-full bg-purple-soft/20 blur-3xl" />
+          <div className="hidden dark:block absolute -left-12 -top-12 h-48 w-48 rounded-full bg-primary/20 blur-3xl" />
+          <div className="hidden dark:block absolute -bottom-12 -right-12 h-48 w-48 rounded-full bg-purple-soft/20 blur-3xl" />
 
           <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-card p-7 shadow-2xl backdrop-blur-md">
             <div className="mb-6 flex items-center justify-between">

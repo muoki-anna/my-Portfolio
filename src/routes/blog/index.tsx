@@ -12,8 +12,9 @@ import {
   ArrowRight,
   Menu,
   X,
+  Lock,
 } from "lucide-react";
-import { getAllBlogPosts } from "@/lib/blog-data";
+import { usePortfolioStore } from "@/lib/portfolio-store";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createFileRoute("/blog/")({
@@ -56,7 +57,10 @@ const socialLinks = [
 ];
 
 function BlogIndex() {
-  const posts = getAllBlogPosts();
+  const { blogs } = usePortfolioStore();
+  const posts = [...blogs].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -352,6 +356,14 @@ function BlogIndex() {
             </Link>
             <Link to="/blog" className="font-semibold text-foreground">
               Blog
+            </Link>
+            <Link
+              to="/admin"
+              className="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100 hover:text-primary"
+              title="Admin Portal"
+            >
+              <Lock className="h-3 w-3" />
+              Admin
             </Link>
           </div>
         </div>

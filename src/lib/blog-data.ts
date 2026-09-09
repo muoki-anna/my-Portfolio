@@ -277,11 +277,37 @@ And hey — if you ever get stuck, feel free to reach out. We're all figuring th
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
+  if (typeof window !== "undefined") {
+    try {
+      const raw = localStorage.getItem("muoki_portfolio_blogs_v1");
+      if (raw) {
+        const list: BlogPost[] = JSON.parse(raw);
+        const match = list.find((p) => p.slug === slug);
+        if (match) return match;
+      }
+    } catch {
+      // fallback
+    }
+  }
   return blogPosts.find((post) => post.slug === slug);
 }
 
 export function getAllBlogPosts(): BlogPost[] {
-  return [...blogPosts].sort(
+  let list = blogPosts;
+  if (typeof window !== "undefined") {
+    try {
+      const raw = localStorage.getItem("muoki_portfolio_blogs_v1");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          list = parsed;
+        }
+      }
+    } catch {
+      // fallback
+    }
+  }
+  return [...list].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }

@@ -16,8 +16,10 @@ import {
   Layout,
   Menu,
   X,
+  Lock,
 } from "lucide-react";
-import { projectsData, type Project } from "@/lib/projects-data";
+import { type Project } from "@/lib/projects-data";
+import { usePortfolioStore } from "@/lib/portfolio-store";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TechIcon } from "@/components/TechIcon";
 
@@ -64,25 +66,26 @@ const socialLinks = [
 type CategoryFilter = "All" | "Backend" | "Full Stack";
 
 function ProjectsPage() {
-  const [activeFilter, setActiveFilter] = useState<CategoryFilter>("All");
+  const { projects } = usePortfolioStore();
+  const [activeFilter, setActiveFilter] = useState<string>("All");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const filteredProjects =
     activeFilter === "All"
-      ? projectsData
-      : projectsData.filter((p) => p.category === activeFilter);
+      ? projects
+      : projects.filter((p) => p.category === activeFilter);
 
-  const categories: { label: CategoryFilter; icon: typeof Code2; count: number }[] = [
-    { label: "All", icon: Layers, count: projectsData.length },
+  const categories = [
+    { label: "All", icon: Layers, count: projects.length },
     {
       label: "Backend",
       icon: Server,
-      count: projectsData.filter((p) => p.category === "Backend").length,
+      count: projects.filter((p) => p.category === "Backend").length,
     },
     {
       label: "Full Stack",
       icon: Layout,
-      count: projectsData.filter((p) => p.category === "Full Stack").length,
+      count: projects.filter((p) => p.category === "Full Stack").length,
     },
   ];
 
@@ -497,6 +500,14 @@ function ProjectsPage() {
             </Link>
             <Link to="/blog" className="hover:text-foreground">
               Blog
+            </Link>
+            <Link
+              to="/admin"
+              className="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100 hover:text-primary"
+              title="Admin Portal"
+            >
+              <Lock className="h-3 w-3" />
+              Admin
             </Link>
           </div>
         </div>

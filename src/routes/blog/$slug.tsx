@@ -10,9 +10,11 @@ import {
   ChevronUp,
   Menu,
   X,
+  Lock,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getBlogPost, getAllBlogPosts, type BlogPost as BlogPostType } from "@/lib/blog-data";
+import { usePortfolioStore } from "@/lib/portfolio-store";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -28,16 +30,13 @@ export const Route = createFileRoute("/blog/$slug")({
             { property: "og:type", content: "article" },
             { name: "twitter:card", content: "summary_large_image" },
           ]
-        : [{ title: "Post Not Found | Muoki Anna" }],
+        : [{ title: "Blog | Muoki Anna" }],
     };
   },
   component: BlogPost,
   loader: ({ params }) => {
     const post = getBlogPost(params.slug);
-    if (!post) {
-      throw notFound();
-    }
-    return { post };
+    return { post, slug: params.slug };
   },
 });
 
@@ -362,7 +361,9 @@ function renderInline(text: string): React.ReactNode {
 /* ------------------------------------------------------------------ */
 
 function BlogPost() {
-  const { post } = Route.useLoaderData() as { post: BlogPostType };
+  const loaderData = Route.useLoaderData() as { post?: BlogPostType; slug: string };
+  const { blogs } = usePortfolioStore();
+  const post = blogs.find((b) => b.slug === loaderData.slug) || loaderData.post;
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [readProgress, setReadProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -379,8 +380,23 @@ function BlogPost() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (!post) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-background px-6 text-center text-foreground">
+        <h1 className="font-display text-3xl font-bold md:text-4xl">Post Not Found</h1>
+        <p className="mt-3 text-muted-foreground">The article you're looking for doesn't exist or has been removed.</p>
+        <Link
+          to="/blog"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-md hover:opacity-90"
+        >
+          <ArrowLeft className="h-4 w-4" /> Back to All Articles
+        </Link>
+      </div>
+    );
+  }
+
   // Get related posts
-  const allPosts = getAllBlogPosts();
+  const allPosts = blogs.length > 0 ? blogs : getAllBlogPosts();
   const relatedPosts = allPosts
     .filter((p) => p.slug !== post.slug)
     .slice(0, 2);
@@ -676,6 +692,14 @@ function BlogPost() {
             </Link>
             <Link to="/blog" className="transition-colors hover:text-foreground">
               All Posts
+            </Link>
+            <Link
+              to="/admin"
+              className="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100 hover:text-primary"
+              title="Admin Portal"
+            >
+              <Lock className="h-3 w-3" />
+              Admin
             </Link>
           </div>
         </div>

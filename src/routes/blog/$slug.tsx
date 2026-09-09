@@ -536,7 +536,7 @@ function BlogPost() {
       </header>
 
       {/* Article Header */}
-      <section className="relative overflow-hidden px-6 pb-8 pt-24 md:pb-10 md:pt-28">
+      <section className="relative overflow-hidden px-4 sm:px-6 pb-8 pt-28 sm:pt-32 md:pb-10 md:pt-36">
         <div className="hidden dark:block absolute inset-0 bg-gradient-radial opacity-30" />
         <div className="hidden dark:block absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl" />
 

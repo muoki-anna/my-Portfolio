@@ -21,7 +21,6 @@ import {
   Check,
   Copy,
   MessageSquare,
-  Lock,
 } from "lucide-react";
 import { toast } from "sonner";
 import { usePortfolioStore } from "@/lib/portfolio-store";
@@ -850,14 +849,6 @@ function Index() {
             <a href="#contact" className="transition-colors hover:text-foreground">
               Contact
             </a>
-            <Link
-              to="/admin"
-              className="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100 hover:text-primary"
-              title="Admin Portal"
-            >
-              <Lock className="h-3 w-3" />
-              Admin
-            </Link>
           </div>
         </div>
       </footer>

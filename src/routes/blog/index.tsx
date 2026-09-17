@@ -12,7 +12,6 @@ import {
   ArrowRight,
   Menu,
   X,
-  Lock,
 } from "lucide-react";
 import { usePortfolioStore } from "@/lib/portfolio-store";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -356,14 +355,6 @@ function BlogIndex() {
             </Link>
             <Link to="/blog" className="font-semibold text-foreground">
               Blog
-            </Link>
-            <Link
-              to="/admin"
-              className="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100 hover:text-primary"
-              title="Admin Portal"
-            >
-              <Lock className="h-3 w-3" />
-              Admin
             </Link>
           </div>
         </div>

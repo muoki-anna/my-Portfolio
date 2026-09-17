@@ -16,7 +16,6 @@ import {
   Layout,
   Menu,
   X,
-  Lock,
 } from "lucide-react";
 import { type Project } from "@/lib/projects-data";
 import { usePortfolioStore } from "@/lib/portfolio-store";
@@ -500,14 +499,6 @@ function ProjectsPage() {
             </Link>
             <Link to="/blog" className="hover:text-foreground">
               Blog
-            </Link>
-            <Link
-              to="/admin"
-              className="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100 hover:text-primary"
-              title="Admin Portal"
-            >
-              <Lock className="h-3 w-3" />
-              Admin
             </Link>
           </div>
         </div>

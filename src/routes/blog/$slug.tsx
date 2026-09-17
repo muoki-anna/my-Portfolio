@@ -10,7 +10,6 @@ import {
   ChevronUp,
   Menu,
   X,
-  Lock,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getBlogPost, getAllBlogPosts, type BlogPost as BlogPostType } from "@/lib/blog-data";
@@ -692,14 +691,6 @@ function BlogPost() {
             </Link>
             <Link to="/blog" className="transition-colors hover:text-foreground">
               All Posts
-            </Link>
-            <Link
-              to="/admin"
-              className="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100 hover:text-primary"
-              title="Admin Portal"
-            >
-              <Lock className="h-3 w-3" />
-              Admin
             </Link>
           </div>
         </div>

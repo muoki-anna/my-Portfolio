@@ -377,16 +377,18 @@
  * Mobile spacing
  */
 
-@media (max-width: 640px) {
-  section {
-    padding-block: 2.5rem;
-  }
+@layer base {
+  @media (max-width: 640px) {
+    section {
+      padding-block: 2.5rem;
+    }
 
-  h1 {
-    line-height: 1.1;
-  }
+    h1 {
+      line-height: 1.1;
+    }
 
-  h2 {
-    line-height: 1.15;
+    h2 {
+      line-height: 1.15;
+    }
   }
 }

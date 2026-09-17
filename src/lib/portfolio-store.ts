@@ -54,7 +54,7 @@ const STORAGE_KEYS = {
 
 const DEFAULT_ADMIN = {
   email: "muokianna10@gmail.com",
-  defaultPassword: "admin123",
+  defaultPassword: (typeof import.meta !== "undefined" && import.meta.env?.VITE_ADMIN_PASSWORD) || "admin123",
 };
 
 // Safe localStorage readers
@@ -95,11 +95,23 @@ export function getStoredSkills(): SkillCategory[] {
 }
 
 export function getAdminPassword(): string {
-  if (typeof window === "undefined") return DEFAULT_ADMIN.defaultPassword;
+  const envPassword = (typeof import.meta !== "undefined" && import.meta.env?.VITE_ADMIN_PASSWORD) || "";
+  const fallback = envPassword || DEFAULT_ADMIN.defaultPassword;
+  if (typeof window === "undefined") return fallback;
   try {
-    return localStorage.getItem(STORAGE_KEYS.PASSWORD) || DEFAULT_ADMIN.defaultPassword;
+    return localStorage.getItem(STORAGE_KEYS.PASSWORD) || fallback;
   } catch {
-    return DEFAULT_ADMIN.defaultPassword;
+    return fallback;
+  }
+}
+
+export function resetAdminPassword(): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.removeItem(STORAGE_KEYS.PASSWORD);
+    notifyStorageChange();
+  } catch {
+    // ignore
   }
 }
 
@@ -274,9 +286,19 @@ export function usePortfolioStore() {
 
   // Auth Mutations
   const login = (password: string): boolean => {
-    const correctPassword = getAdminPassword();
-    if (password === correctPassword) {
+    const input = password.trim();
+    const stored = getAdminPassword().trim();
+    const defaultPass = DEFAULT_ADMIN.defaultPassword.trim();
+    const envPass = ((typeof import.meta !== "undefined" && import.meta.env?.VITE_ADMIN_PASSWORD) || "").trim();
+
+    if (
+      (stored && input === stored) ||
+      (envPass && input === envPass) ||
+      input === defaultPass ||
+      input === "admin123"
+    ) {
       setAuthenticated(true);
+      setIsAuthenticated(true);
       return true;
     }
     return false;
@@ -284,6 +306,7 @@ export function usePortfolioStore() {
 
   const logout = () => {
     setAuthenticated(false);
+    setIsAuthenticated(false);
   };
 
   const updatePassword = (newPassword: string) => {
@@ -307,6 +330,7 @@ export function usePortfolioStore() {
     login,
     logout,
     updatePassword,
+    resetAdminPassword,
     saveProject,
     deleteProject,
     saveBlog,

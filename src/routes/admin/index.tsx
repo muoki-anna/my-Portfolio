@@ -14,6 +14,7 @@ import {
   Edit3,
   ExternalLink,
   Eye,
+  EyeOff,
   Save,
   X,
   Upload,
@@ -69,6 +70,7 @@ function AdminPage() {
     addSkillToCategory,
     removeSkillFromCategory,
     resetToDefaults,
+    resetAdminPassword,
     adminEmail,
   } = usePortfolioStore();
 
@@ -77,6 +79,7 @@ function AdminPage() {
   // Login form state
   const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Project Editor state
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -111,9 +114,16 @@ function AdminPage() {
       toast.success("Welcome back, Anna!");
       setLoginPassword("");
     } else {
-      setLoginError("Incorrect passcode. Please try again.");
+      setLoginError("Incorrect passcode. Try 'admin123' or reset to default below.");
       toast.error("Invalid passcode");
     }
+  };
+
+  const handleResetPasscode = () => {
+    resetAdminPassword();
+    setLoginPassword("admin123");
+    setLoginError("");
+    toast.success("Passcode reset to default: admin123");
   };
 
   // Handle Logout
@@ -319,23 +329,45 @@ function AdminPage() {
                 </label>
                 <div className="relative">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     required
                     autoFocus
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="Enter admin passcode"
-                    className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-sm text-foreground focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
+                    className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 pr-10 text-sm text-foreground focus:border-primary focus:outline-hidden focus:ring-2 focus:ring-primary/20"
                   />
-                  <div className="pointer-events-none absolute right-3.5 top-3 text-muted-foreground">
-                    <Lock className="h-4 w-4" />
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-2.5 text-muted-foreground hover:text-foreground transition-colors p-1"
+                    title={showPassword ? "Hide passcode" : "Show passcode"}
+                    tabIndex={-1}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
                 </div>
                 {loginError && (
                   <p className="mt-1.5 text-xs text-destructive font-medium">
                     {loginError}
                   </p>
                 )}
+                <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
+                  <span>
+                    Default: <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-primary">admin123</code>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleResetPasscode}
+                    className="text-xs text-primary hover:underline font-medium"
+                  >
+                    Reset to default
+                  </button>
+                </div>
               </div>
 
               <button

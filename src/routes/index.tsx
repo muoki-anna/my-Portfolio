@@ -834,7 +834,7 @@ function Index() {
       <footer className="border-t border-border/40 px-6 py-7">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Muoki Anna. Built with ❤️.
+            © {new Date().getFullYear()} Muoki Anna.
           </p>
           <div className="flex items-center gap-5 text-sm text-muted-foreground">
             <Link to="/projects" className="transition-colors hover:text-foreground">

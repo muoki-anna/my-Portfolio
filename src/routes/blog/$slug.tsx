@@ -22,13 +22,13 @@ export const Route = createFileRoute("/blog/$slug")({
     return {
       meta: post
         ? [
-            { title: `${post.title} | Muoki Anna` },
-            { name: "description", content: post.excerpt },
-            { property: "og:title", content: post.title },
-            { property: "og:description", content: post.excerpt },
-            { property: "og:type", content: "article" },
-            { name: "twitter:card", content: "summary_large_image" },
-          ]
+          { title: `${post.title} | Muoki Anna` },
+          { name: "description", content: post.excerpt },
+          { property: "og:title", content: post.title },
+          { property: "og:description", content: post.excerpt },
+          { property: "og:type", content: "article" },
+          { name: "twitter:card", content: "summary_large_image" },
+        ]
         : [{ title: "Blog | Muoki Anna" }],
     };
   },
@@ -680,7 +680,7 @@ function BlogPost() {
       <footer className="border-t border-border/40 px-6 py-7">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Muoki Anna. Built with care.
+            © {new Date().getFullYear()} Muoki Anna.
           </p>
           <div className="flex items-center gap-5 text-sm text-muted-foreground">
             <Link to="/" className="transition-colors hover:text-foreground">
